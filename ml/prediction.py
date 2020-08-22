@@ -13,7 +13,7 @@ def online_train(model_name, active, new):
     train the model on a new batch of samples
     
     model_name, string: state ex. 'california'
-    active, numpy array: in shape (samples), the number of days with data provided 
+    active, numpy array: in shape (samples), the number of days with data provided (must be at least 14), the active cases 
     new, numpy array: in shape (samples), same as before with new cases 
     
     returns:
@@ -28,10 +28,10 @@ def online_train(model_name, active, new):
 
 def get_predictions(model_name, active, new):
     """
-    train the model on a new batch of samples
+    returns the predictions of the active and new cases from a 14 day window
     
     model_name, string: state ex. 'california'
-    active, numpy array: in shape (samples), the number of days with data provided 
+    active, numpy array: in shape (samples), the number of days with data provided (must be at least 14), the active cases 
     new, numpy array: in shape (samples), same as before with new cases 
     
     returns: 
