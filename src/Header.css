@@ -1,0 +1,18 @@
+.header {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  /* background-color: #FFA001; */
+  /* background-color: #322A7C; */
+  background-color: white;
+  width: 95%;
+  height: 70px;
+  margin: 0 auto;
+  /* margin-top: 20px; */
+  color: #322A7C;
+  font-family: 'Baloo Tamma 2', cursive;
+  font-size: 30px;
+}
