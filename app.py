@@ -11,6 +11,9 @@ Data = './Webapp/Data'
 predictionData = './Webapp/Prediction'
 batchData = './Webapp/Batch'
 
+@app.route("/")
+def hello_world():
+    return jsonify("hello world")
 
 @app.route("/data/<location>")
 def sendData(location):
@@ -209,5 +212,3 @@ def readCSV(filename, column='all'):
                     return data
             return data
 
-if __name__=='__main__':
-    app.run(host="127.0.0.1", port = 5000)
