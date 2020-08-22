@@ -5,7 +5,6 @@ import csv
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
-
 path = './COVID-19'
 usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
 Data = './Webapp/Data'
@@ -248,5 +247,5 @@ def readCSV(filename, column='all'):
                     return data
             return data
 
-if __name__=='__main__':
+if __name__ == "__main__":
     app.run(debug=True)
