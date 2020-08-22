@@ -85,9 +85,6 @@ def sendPrediction(location,n=14):
         csv_reader = csv.reader(predict_file)
         skipfirstline = True
         for row in (csv_reader):
-            if skipfirstline:
-                skipfirstline = False
-                continue
             date = row[1]
             dailyTest = row[2]
             dailyActive = row[3]
