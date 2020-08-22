@@ -109,13 +109,13 @@ def sendBatch(location):
     filepath = batchData + '/' + location +'.csv'
     batch = {}
     num_lines = sum(1 for line in open(filepath))
-    print(num_lines)
+    #print(num_lines)
     num_lines = num_lines -3
     with open(filepath) as batchfile:
         csv_reader = csv.reader(batchfile)
         for row in csv_reader:
             num_lines = num_lines - 1
-            print(num_lines)
+            #print(num_lines)
             if(num_lines<0):
                 date = row[1]
                 entry = row[0]
