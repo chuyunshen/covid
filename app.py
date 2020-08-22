@@ -5,11 +5,11 @@ import csv
 
 app = Flask(__name__)
 
-path = './../COVID-19'
-usData = './../COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
-Data = './Data'
-predictionData = './Prediction'
-batchData = './Batch'
+path = './COVID-19'
+usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
+Data = './Webapp/Data'
+predictionData = './Webapp/Prediction'
+batchData = './Webapp/Batch'
 
 
 @app.route("/data/<location>")
