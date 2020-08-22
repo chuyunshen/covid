@@ -12,6 +12,7 @@ gitpython = "*"
 pandas = "*"
 numpy = "*"
 tensorflow = "*"
+jsonify = "*"
 
 [requires]
 python_version = "3.7"
