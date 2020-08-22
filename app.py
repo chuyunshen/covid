@@ -1,16 +1,20 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,render_template
 import git
 import os
 import csv
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
+
 
 path = './COVID-19'
 usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
 Data = './Webapp/Data'
-predictionData = './Webapp/Prediction'
+predictionData = './Prediction'
 batchData = './Webapp/Batch'
 
+@app.route("/")
+def index():
+    return render_template('index.html')
 
 @app.route("/data/<location>")
 def sendData(location):
@@ -35,8 +39,6 @@ def sendDataColumn(location, title):
 @app.route("/pull")
 def pull():
     #display:app updating, please wait
-
-
     oldfiles = os.listdir(usData)
     repo = git.Repo(path)
     o = repo.remotes.origin
@@ -69,12 +71,23 @@ def sendPrediction(location,n=14):
         for row in (csv_reader):
             num_lines= num_lines-1
             if (num_lines<0):
-                pastData.update({row[0]:[row[1],row[2],row[3]]})
+                date = row[0]
+                dailyTest = row[1]
+                dailyActive = row[2]
+                entry = row[3]
+                pastData[date] = []
+                pastData[date].append({
+                    'dailyTest': dailyTest,
+                    'dailyActive': dailyActive,
+                    'entry': entry
+                })
+
+
     with open(predictionpath) as predict_file:
         csv_reader = csv.reader(predict_file)
         for row in (csv_reader):
             pastData.update({row[0]:[row[1],row[2],row[3]]})
-    response = jsonify({"prediction":pastData})
+    response = jsonify({location:pastData})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
@@ -87,12 +100,23 @@ def sendBatch(location):
     with open(filepath) as batchfile:
         csv_reader = csv.reader(filepath)
         for row in csv_reader:
+
             try:
-                batch.update({row[0]:[row[1],row[2],row[3]]})
+                date = row[0]
+                dailyTest = row[1]
+                dailyActive = row[2]
+                entry = row[3]
+                batch[date] = []
+                batch[date].append({
+                    'level1': dailyTest,
+                    'level2': dailyActive,
+                    'level3': entry
+                })
+
             except:
                 return jsonify("empty")
 
-    response = jsonify({"prediction":pastData})
+    response = jsonify({location:pastData})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
@@ -136,7 +160,7 @@ def updateCSV(path,oldpath):
                 confirm = int(confirm) - int(old_comfired)
                 tested = row[11]
                 index = 0
-                outputfilePath = './Data/'+name+'.csv'
+                outputfilePath = Data+'/'+name+'.csv'
                 print(outputfilePath)
 
                 with open(outputfilePath) as outfile:
@@ -210,4 +234,5 @@ def readCSV(filename, column='all'):
             return data
 
 if __name__=='__main__':
-    app.run(host="127.0.0.1", port = 5000)
+    #updateCSV(usData+'/'+'08-21-2020.csv',usData+'/'+'08-20-2020.csv')
+    app.run(debug=True)

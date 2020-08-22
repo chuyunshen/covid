@@ -16,18 +16,18 @@ export default class Location extends React.Component{
       ],
       locations: [
           { country: 'Canada', region: 'Alberta' },
-          { country: 'Canada', region: 'British Columbia' },
-          { country: 'Canada', region: 'Manitoba' },
-          { country: 'Canada', region: 'New Brunswick' },
-          { country: 'Canada', region: 'Newfoundland and Labrador' },
-          { country: 'Canada', region: 'Northwest Territories' },
-          { country: 'Canada', region: 'Nova Scotia' },
-          { country: 'Canada', region: 'Nunavut' },
-          { country: 'Canada', region: 'Ontario' },
-          { country: 'Canada', region: 'Prince Edward Island' },
-          { country: 'Canada', region: 'Quebec' },
-          { country: 'Canada', region: 'Saskatchewan' },
-          { country: 'Canada', region: 'Yukon' },
+          // { country: 'Canada', region: 'British Columbia' },
+          // { country: 'Canada', region: 'Manitoba' },
+          // { country: 'Canada', region: 'New Brunswick' },
+          // { country: 'Canada', region: 'Newfoundland and Labrador' },
+          // { country: 'Canada', region: 'Northwest Territories' },
+          // { country: 'Canada', region: 'Nova Scotia' },
+          // { country: 'Canada', region: 'Nunavut' },
+          // { country: 'Canada', region: 'Ontario' },
+          // { country: 'Canada', region: 'Prince Edward Island' },
+          // { country: 'Canada', region: 'Quebec' },
+          // { country: 'Canada', region: 'Saskatchewan' },
+          // { country: 'Canada', region: 'Yukon' },
           { country: 'USA', region: 'Alabama' },
           { country: 'USA', region: 'Alaska' },
           { country: 'USA', region: 'Arizona' },
@@ -97,12 +97,11 @@ export default class Location extends React.Component{
 
   handleRegionChange = ( event, value ) => {
     this.setState({selectedRegion: value});
+    this.props.sendData(value);
+    console.log(value);
   }
 
   render() {
-    console.log(this.state.locations);
-    console.log(this.state.selectedCountry);
-    console.log(this.state.selectedRegion);
     return (
     <div className='Location'>
       Location

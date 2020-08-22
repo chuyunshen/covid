@@ -1,0 +1,22 @@
+.ScrollableLocations {
+  display: flex;
+  /* justify-content: center; */
+  align-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  font-family: 'Baloo Tamma 2', cursive;
+  font-size: 16px;
+  overflow: scroll;
+  margin-top: 20px;
+}
+
+.LocationTab {
+  color: black;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.search-bar {
+  display: flex;
+  margin: 0 auto;
+}

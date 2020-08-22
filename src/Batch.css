@@ -1,0 +1,49 @@
+.Batch {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  /* background-color: #F5F6FF; */
+  background-color: white;
+  height: 300px;
+  margin-left: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #322A7C;
+  font-family: 'Baloo Tamma 2', cursive;
+  font-size: x-large;
+  padding: 20px;
+}
+
+.Select {
+  width: 60px;
+  text-align: center;
+  font-size: x-large;
+}
+
+.form {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.label {
+    margin: 0 auto;
+}
+
+.Size {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 10px;
+  color: black;
+  font-size: large;
+}
+
+
+.batchSize {
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -8,7 +8,6 @@ export default class Procedure extends React.Component{
     }
   }
   render() {
-    console.log(this.state.locations);
     return (
       <div className='Procedure'>
         Procedure
