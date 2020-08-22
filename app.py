@@ -3,7 +3,8 @@ import git
 import os
 import csv
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
+
 
 path = './COVID-19'
 usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
@@ -12,8 +13,8 @@ predictionData = './Webapp/Prediction'
 batchData = './Webapp/Batch'
 
 @app.route("/")
-def hello_world():
-    return jsonify("hello world")
+def index():
+    return render_template('index.html')
 
 @app.route("/data/<location>")
 def sendData(location):
