@@ -108,29 +108,30 @@ def sendPrediction(location,n=14):
 def sendBatch(location):
     filepath = batchData + '/' + location +'.csv'
     batch = {}
+    num_lines = sum(1 for line in open(filepath))
+    print(num_lines)
+    num_lines = num_lines -3
     with open(filepath) as batchfile:
-        csv_reader = csv.reader(filepath)
-        skipfirstline = True
+        csv_reader = csv.reader(batchfile)
         for row in csv_reader:
-            if skipfirstline:
-                skipfirstline = False
-                continue
-            try:
-                date = row[0]
-                dailyTest = row[1]
-                dailyActive = row[2]
-                entry = row[3]
+            num_lines = num_lines - 1
+            print(num_lines)
+            if(num_lines<0):
+                date = row[1]
+                entry = row[0]
+                level1 = row[2]
+                level2 = row[3]
+                level3 = row[4]
                 batch[date] = []
                 batch[date].append({
-                    'level1': dailyTest,
-                    'level2': dailyActive,
-                    'level3': entry
+                    'entry' : entry,
+                    'level1': level1,
+                    'level2': level2,
+                    'level3': level3
                 })
 
-            except:
-                return jsonify("empty")
 
-    response = jsonify({location:pastData})
+    response = jsonify({location:batch})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
