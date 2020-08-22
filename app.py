@@ -10,7 +10,7 @@ path = './COVID-19'
 usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
 Data = './Webapp/Data'
 predictionData = './Prediction'
-batchData = './Webapp/Batch'
+batchData = './Batch'
 
 @app.route("/")
 def index():
@@ -81,12 +81,23 @@ def sendPrediction(location,n=14):
                     'dailyActive': dailyActive,
                     'entry': entry
                 })
-
-
     with open(predictionpath) as predict_file:
         csv_reader = csv.reader(predict_file)
+        skipfirstline = True
         for row in (csv_reader):
-            pastData.update({row[0]:[row[1],row[2],row[3]]})
+            if skipfirstline:
+                skipfirstline = False
+                continue
+            date = row[1]
+            dailyTest = row[2]
+            dailyActive = row[3]
+            entry = row[0]
+            pastData[date] = []
+            pastData[date].append({
+                'dailyTest': dailyTest,
+                'dailyActive': dailyActive,
+                'entry': entry
+            })
     response = jsonify({location:pastData})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -99,8 +110,11 @@ def sendBatch(location):
     batch = {}
     with open(filepath) as batchfile:
         csv_reader = csv.reader(filepath)
+        skipfirstline = True
         for row in csv_reader:
-
+            if skipfirstline:
+                skipfirstline = False
+                continue
             try:
                 date = row[0]
                 dailyTest = row[1]
@@ -234,5 +248,4 @@ def readCSV(filename, column='all'):
             return data
 
 if __name__=='__main__':
-    #updateCSV(usData+'/'+'08-21-2020.csv',usData+'/'+'08-20-2020.csv')
     app.run(debug=True)
