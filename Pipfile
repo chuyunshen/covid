@@ -12,6 +12,7 @@ gitpython = "*"
 pandas = "*"
 numpy = "*"
 tensorflow = "*"
+npm = "*"
 jsonify = "*"
 
 [requires]
