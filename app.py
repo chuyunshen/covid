@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder="build/static", template_folder="build")
 path = './COVID-19'
 usData = './COVID-19/csse_covid_19_data/csse_covid_19_daily_reports_us'
 Data = './Webapp/Data'
-predictionData = './Webapp/Prediction'
+predictionData = './Prediction'
 batchData = './Webapp/Batch'
 
 @app.route("/")
@@ -160,7 +160,7 @@ def updateCSV(path,oldpath):
                 confirm = int(confirm) - int(old_comfired)
                 tested = row[11]
                 index = 0
-                outputfilePath = './Data/'+name+'.csv'
+                outputfilePath = Data+'/'+name+'.csv'
                 print(outputfilePath)
 
                 with open(outputfilePath) as outfile:
@@ -234,4 +234,5 @@ def readCSV(filename, column='all'):
             return data
 
 if __name__=='__main__':
+    #updateCSV(usData+'/'+'08-21-2020.csv',usData+'/'+'08-20-2020.csv')
     app.run(debug=True)
