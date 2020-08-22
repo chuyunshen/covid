@@ -19,14 +19,18 @@ def sendData(location):
     filePath = Data +'/'+location+ '.csv'
     print (filePath)
     locationData = readCSV(filePath) #read in csv, store in list
-    return jsonify({location: locationData})
+    response = jsonify({location: locationData})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route("/data/<location>/<title>")
 def sendDataColumn(location, title):
     filePath = Data +'/'+location+ '.csv'
     print (filePath)
     locationData = readCSV(filePath,title) #read in csv, store in list
-    return jsonify({location: locationData})
+    response = jsonify({location: locationData})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route("/pull")
 def pull():
@@ -70,7 +74,10 @@ def sendPrediction(location,n=14):
         csv_reader = csv.reader(predict_file)
         for row in (csv_reader):
             pastData.update({row[0]:[row[1],row[2],row[3]]})
-    return jsonify({"prediction":pastData})
+    response = jsonify({"prediction":pastData})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
 
 #this will send the batch sizes
 @app.route("/batch/<location>")
@@ -85,7 +92,9 @@ def sendBatch(location):
             except:
                 return jsonify("empty")
 
-    return jsonify({"batch":batch})
+    response = jsonify({"prediction":pastData})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 def Diff(A, B):
    return (list(set(A) - set(B)))
