@@ -3,6 +3,10 @@ import git
 import os
 import csv
 
+import update_ml
+import pandas as pd
+import numpy as np
+
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
 path = './COVID-19'
@@ -104,15 +108,16 @@ def sendPrediction(location,n=14):
 def sendBatch(location):
     filepath = batchData + '/' + location +'.csv'
     batch = {}
-    num_lines = sum(1 for line in open(filepath))
+    #num_lines = sum(1 for line in open(filepath))
     #print(num_lines)
-    num_lines = num_lines -3
+    #num_lines = num_lines -3
+    num_lines = 0
     with open(filepath) as batchfile:
         csv_reader = csv.reader(batchfile)
         for row in csv_reader:
-            num_lines = num_lines - 1
+            num_lines = num_lines + 1
             #print(num_lines)
-            if(num_lines<0):
+            if(num_lines<4):
                 date = row[1]
                 entry = row[0]
                 level1 = row[2]
@@ -132,13 +137,20 @@ def sendBatch(location):
     return response
 
 def Diff(A, B):
-   return (list(set(A) - set(B)))
+    return (list(set(A) - set(B)))
 
 
 #update prediction for each region and write to Prediction folder
 #./Prediction/{Name}.csv
 def updatePrediction():
     #run prediction for each state
+    states = [s.split('.')[0] for s in list(os.listdir('Webapp/Data'))]
+    timestep=14
+    
+    for state in states:
+        df = np.array(pd.read_csv('Webapp/Data/'+state+'.csv', sep=',', header=None))[-timestep-1:,:].astype(int)
+        date, active, new = np.array(df[:,0]), np.array(df[:,1]), np.array(df[:,2])
+        update_ml.update_predbatch(state, active, new)
 
 
     #for each state, get a list, write the list to predictionData/{name}.csv
