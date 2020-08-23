@@ -3,9 +3,9 @@ import git
 import os
 import csv
 
-import update_ml 
-import pandas as pd 
-import numpy as np 
+import update_ml
+import pandas as pd
+import numpy as np
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
