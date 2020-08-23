@@ -109,15 +109,16 @@ def sendPrediction(location,n=14):
 def sendBatch(location):
     filepath = batchData + '/' + location +'.csv'
     batch = {}
-    num_lines = sum(1 for line in open(filepath))
+    #num_lines = sum(1 for line in open(filepath))
     #print(num_lines)
-    num_lines = num_lines -3
+    #num_lines = num_lines -3
+    num_lines = 0
     with open(filepath) as batchfile:
         csv_reader = csv.reader(batchfile)
         for row in csv_reader:
-            num_lines = num_lines - 1
+            num_lines = num_lines + 1
             #print(num_lines)
-            if(num_lines<0):
+            if(num_lines<4):
                 date = row[1]
                 entry = row[0]
                 level1 = row[2]
