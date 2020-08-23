@@ -13,7 +13,7 @@ export default class Header extends React.Component{
     return (
     <div className='header'>
       <img src={logo} className="App-logo"/>
-      <div className="HeaderText">Hack Covid</div>
+      <div className="HeaderText">Covid-19 Rapid Processor</div>
     </div>)
   }
 }
