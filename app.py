@@ -3,6 +3,10 @@ import git
 import os
 import csv
 
+import update_ml 
+import pandas as pd 
+import numpy as np 
+
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
 
@@ -121,13 +125,20 @@ def sendBatch(location):
     return response
 
 def Diff(A, B):
-   return (list(set(A) - set(B)))
+    return (list(set(A) - set(B)))
 
 
 #update prediction for each region and write to Prediction folder
 #./Prediction/{Name}.csv
 def updatePrediction():
     #run prediction for each state
+    states = [s.split('.')[0] for s in list(os.listdir('Webapp/Data'))]
+    timestep=14
+    
+    for state in states:
+        df = np.array(pd.read_csv('Webapp/Data/'+state+'.csv', sep=',', header=None))[-timestep-1:,:].astype(int)
+        date, active, new = np.array(df[:,0]), np.array(df[:,1]), np.array(df[:,2])
+        update_ml.update_predbatch(state, active, new)
 
 
     #for each state, get a list, write the list to predictionData/{name}.csv
