@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import logo from './logo.svg';
 
 export default class Header extends React.Component{
   constructor(props) {
@@ -11,7 +12,8 @@ export default class Header extends React.Component{
   render() {
     return (
     <div className='header'>
-      Hack Covid
+      <img src={logo} className="App-logo"/>
+      <div className="HeaderText">Hack Covid</div>
     </div>)
   }
 }

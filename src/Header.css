@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 10px;
   /* background-color: #FFA001; */
   /* background-color: #322A7C; */
@@ -15,4 +15,32 @@
   color: #322A7C;
   font-family: 'Baloo Tamma 2', cursive;
   font-size: 30px;
+}
+
+.App-logo {
+  height: 40px;
+  pointer-events: none;
+  display: flex;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.HeaderText {
+  display: flex;
+  margin-top: 10px;
 }

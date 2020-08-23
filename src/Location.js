@@ -98,7 +98,6 @@ export default class Location extends React.Component{
   handleRegionChange = ( event, value ) => {
     this.setState({selectedRegion: value});
     this.props.sendData(value);
-    console.log(value);
   }
 
   render() {

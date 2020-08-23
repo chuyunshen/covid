@@ -26,29 +26,17 @@ export default class PredictedDataGraph extends React.Component{
     .catch((error) => console.log(error))
   }
 
-  fetchPredictedData = (location) => {
-    fetch(`http://${BASE_URL}/prediction/${location}`)
-    .then(response => response.json())
-    .then((response) => { 
-      this.setState({prediction: response});
-      this.reshapeData();
-    })
-    .catch((error) => console.log(error))
-
-  }
-
   reshapeData = () => {
-    // date: {dailyActive, dailyTest, entry}
     const dateData = this.state.actualData[this.props.location]
     let dates = [];
     let dailyActive = [];
     let dailyTest = [];
     for (const date in dateData) {
       dates.push(date);
-      // TODO: check what happens if the values are null
       dailyActive.push({ x: convertToDate(date), y: dateData[date][0]['dailyActive'] });
       dailyTest.push({ x: convertToDate(date), y: dateData[date][0]['dailyTest'] });
     }
+    convertToDate("06302020");
     this.setState({ series: [ 
       { name: 'Active Cases', data: dailyActive },
       { name: 'Tested Cases', data: dailyTest }
@@ -59,13 +47,15 @@ export default class PredictedDataGraph extends React.Component{
     this.fetchData(this.props.location);
   }
 
-  componentDidUpdate() {
-    this.fetchData(this.props.location);
+  componentDidUpdate(prevProps, preState) {
+    if (prevProps.location !== this.props.location) {
+      this.fetchData(this.props.location);
+    }
   }
 
   render() {
     if (this.state.categories && this.state.series) {
-      return (<Graph title={this.props.title} series={ this.state.series } />)
+      return (<Graph type="line" title={this.props.title} series={ this.state.series } />)
     } else {
       return (<Spinner />)
     }

@@ -9,7 +9,22 @@ export default class Graph extends React.Component {
     this.state = {
       options: {
         chart: {
-          id: 'apexchart-example'
+          id: 'apexchart-example',
+        },
+        annotations: {
+          xaxis: [{
+            x: new Date(this.props.presentDay).getTime(),
+            strokeDashArray: 0,
+            borderColor: '#775DD0',
+            label: {
+              borderColor: '#775DD0',
+              style: {
+                color: '#fff',
+                background: '#775DD0',
+              },
+              text: 'Present Day',
+            }
+          }]
         },
         title: {
           text: this.props.title ,
@@ -28,15 +43,13 @@ export default class Graph extends React.Component {
         colors: ['#322A7C', '#F44336', '#9C27B0'],
         xaxis: {
           type: 'datetime',
-          // categories: this.props.categories 
         }
       }
     }
   }
   render() {
-    console.log(this.props.series);
     return (
-      <Chart className="Chart" options={this.state.options} series={this.props.series} type="line" width={700} height={350} />
+      <Chart className="Chart" options={this.state.options} series={this.props.series} type={this.props.type} width={700} height={350} />
     )
   }
 }

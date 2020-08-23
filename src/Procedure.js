@@ -12,11 +12,10 @@ export default class Procedure extends React.Component{
       <div className='Procedure'>
         Procedure
         <div className='Explanation'>
-          <p> Explain our procedure. </p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          We first divide our covid test samples into batches of a certain size, and test each batch on if there are positive covid cases.
+          For each group that shows a positive output (at leaset one covid case), we divide these groups into sub-batches of another size, and subsequently test each batch.
+          Then we iterate the process once more to obtain more sub-batchesj with positive covid cases.
+          Finally, for these sub-batches, we test each sample to single out the individual cases.
         </div>
       </div>
     )

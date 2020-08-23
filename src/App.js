@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import './App.css';
 import { convertToDate } from './utils';
 import ActualDataGraph from './ActualDataGraph';
+import PredictedDataGraph from './PredictedDataGraph';
 
 
 export default class App extends React.Component {
@@ -33,14 +34,12 @@ export default class App extends React.Component {
         <div className="Panels">
           <div className="LeftPanel">
             <Location sendData={this.getSelectedRegion}/>
-            <Batch />
+            <Batch location={this.state.selectedRegion} />
             <Procedure />
           </div>
           <div className="RightPanel">
-            <div>{this.state.selectedRegion}</div>
             <ActualDataGraph title={"Actual Data in " + this.state.selectedRegion} location={ this.state.selectedRegion } />
-            <ActualDataGraph title={"Predicted Data in " + this.state.selectedRegion} location={ this.state.selectedRegion } />
-            <ActualDataGraph title={"Predicted Percentage in " + this.state.selectedRegion} location={ this.state.selectedRegion } />
+            <PredictedDataGraph title={"Predicted Data in " + this.state.selectedRegion} location={ this.state.selectedRegion } />
           </div>
         </div>
       </div>
